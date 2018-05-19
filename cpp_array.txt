@@ -1,0 +1,59 @@
+// array::at
+#include <iostream>
+#include <array>
+#include<cstring>
+#define N 10
+using namespace std;
+
+int main ()
+{
+   array<int,N> myarray,newarray;
+
+  array<int,N> sizeArray ;
+   int i = 0;
+
+  // assign some values:
+  for (int i=0; i<N; i++) myarray.at(i) = i+1;
+
+  // print content:
+  cout << "myarray contains:";
+  for (int i=0; i<N; i++)
+    cout << ' ' << myarray.at(i);
+    cout << '\n';
+    //cout << myarray.front();
+    //cout << myarray.back();
+    for(auto i : myarray)
+    cout <<i<<'\t';
+    cout<<'\n';
+    for(auto it = myarray.cbegin();it != myarray.end();++it,++i){
+        newarray.at(i) = 2;
+        cout<<newarray.at(i)<<'\t';
+        
+    }
+    cout<<endl;
+    //for(auto rit = myarray.rbegin();rit != myarray.rend();++rit)
+      //  cout<<*rit<<'\t';
+    for(int i =0;i != myarray.size();i++){
+        newarray[i] = myarray[myarray.size()-1-i];
+        cout<<newarray[i]<<'\t';
+    }
+    cout<<endl;
+    for(auto rit = newarray.rend()-1;rit != newarray.rbegin()-1;--rit){
+        cout<<*rit<<'\t';
+    }
+    cout<<endl;
+    for(auto rit = newarray.rbegin(); rit != newarray.rend();++rit )
+        cout<<*rit<<'\t';
+    cout<<endl;
+    cout<<sizeArray.max_size()<<endl;
+    sizeArray.fill(3);
+    for(auto p : sizeArray){
+        cout<<p<<'\t';
+    }
+    cout<<endl;
+    newarray.swap();
+     for(auto p : sizeArray){
+        cout<<p<<'\t';
+    }
+  return 0;
+}

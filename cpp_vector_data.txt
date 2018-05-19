@@ -1,0 +1,48 @@
+#include<iostream>
+#include<array>
+#include<vector>
+using namespace std;
+int main (){
+    array<int,5> arr;      //<类型，大小>
+    get<2>(arr) = 1;	   //get<arr.size()-1>  get的最大值为arr.size() - 1
+    arr.at(4) = 4;
+    cout<<arr[4]<<endl;
+    string s = "mengziyue is unstoppable!";
+    vector<string> v1(3,s);  //initialization
+    //v1.assign(arr.at(4),s);
+    for(auto p : v1)
+        cout<<p<<endl;
+    cout<<v1.at(2)<<endl;
+    vector<int> v2(7,0),v(2,8);
+    if(!(v2.at(0)))
+        cout<<"v2[0] is 0"<<endl; 
+    int* a =v.data();      //此时返回值为底层数组的指针，此时数据类型应该严格一致。
+    cout<<a[0]<<endl;       //此刻改变数组下表即可访问该元素。若下表越界，不会报错，默认初始化为0。
+    cout<<arr.back()<<endl;   //同理，arr.back()等价于arr[arr.size()-1]
+    cout<<arr[arr.size() - 1]<<endl;
+    for(auto i : arr)      //arr中的其余元素未被初始化，为随机数，BE cautions!!!
+        cout<<i<<'\t';
+    for(auto i : arr)      //此时右值arr是一个int型数组，相当于arr[0],因此直接使用
+        cout<<i<<'\t';
+    cout<<endl;
+    for(auto p = arr.rbegin(); p != arr.rend();++p)   //此时右值为指针类型，下面引用时要引用指针。
+        cout<<*p<<'\t';
+    cout<<endl;
+    vector<int>::size_type sz;
+    sz = v2.capacity();
+    cout<<sz<<endl;
+    int i = 0;			//将arr中的元素赋值给vector
+    cout<<"after initialazation v3 is"<<endl;
+    for(auto it = arr.begin(); it != arr.end();++it,++i){
+        v3.at(i) = *it;      //此时必须先初始化v3的大小
+    }
+    for(auto p:v3)
+        cout<<p<<'\t';
+    cout<<endl;
+    cout<<v3.capacity()<<endl;
+    v3.shrink_to_fit();       //shrink_to_fit 感觉没有用啊
+    for(auto p:v3)
+        cout<<p<<'\t';
+    cout<<endl;
+    cout<<v3.capacity()<<endl;
+}

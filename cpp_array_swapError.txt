@@ -1,0 +1,51 @@
+// Innormal after using SWAP funcction 
+#include <iostream>
+#include <array>
+#include<cstring>
+#define N 10
+using namespace std;
+
+int main ()
+{
+   array<int,N> myarray,newarray;
+
+  array<int,N> sizeArray ;
+   int i = 0;
+
+  // assign some values:
+  for (int i=0; i<N; i++) myarray.at(i) = i+1;
+
+  // print content:
+  cout << "myarray contains:";
+  for (int i=0; i<N; i++)
+    cout << ' ' << myarray.at(i);
+    cout << '\n';
+    //cout << myarray.front();
+    //cout << myarray.back();
+    for(auto i : myarray)
+    cout <<i<<'\t';
+    cout<<'\n';
+    for(auto it = myarray.cbegin();it != myarray.end();++it,++i){
+        newarray.at(i) = 2;
+        cout<<newarray.at(i)<<'\t';
+        
+    }
+    cout<<endl;
+    for(auto p:sizeArray)
+        p = 9;
+    
+    cout<<"//sizeArray    9  9  9  9  9  9  9  9  9  9"<<endl;
+    cout<<"//newarray     2  2  2  2  2  2  2  2  2  2"<<endl;
+    newarray.swap(sizeArray);
+    cout<<"after swap"<<endl;
+    cout<<"sizeArray is "<<endl;
+     for(auto p : sizeArray){
+        cout<<p<<'\t';
+    }
+    cout<<endl;
+    cout<<"newarray is:"<<endl;
+     for(auto w : newarray){
+        cout<<w<<'\t';
+    }
+  return 0;
+}
