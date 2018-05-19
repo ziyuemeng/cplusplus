@@ -1,0 +1,32 @@
+step1:
+	建立仓库，cd到本地项目根目录下，执行git命令
+		git init
+step2:
+	将项目的所有文件添加到仓库中
+		git add.
+		将.换为具体文件名可单独添加文件
+step3：
+	将add的文件commit到仓库
+		git commit -m "注释"
+		上传成功后注释显示在文件名后
+step4:
+	去github上创建自己的Repository，获取url
+		url就是你新建的仓库的网址
+step5：
+	关联本地仓库到github上
+		git remote add origin "url"
+		url是上次的repository的网址
+step6：
+	上传之前pull一下
+		git pull origin master
+		如果是新建的仓库第一次上传可能会报错，不用管
+step7：
+	上传
+		git push -u origin master
+		完成！
+
+
+
+
+PS：我的名字是ziyuemeng
+密码是***********哈哈哈
