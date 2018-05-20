@@ -1,0 +1,68 @@
+//下次开始一个项目前一定先把print函数写好  ㄒoㄒ
+#include <iostream>
+#include <vector>
+using namespace std;
+int main ()
+{
+  vector<int> myvector;
+  myvector.push_back (100);
+  myvector.push_back (200);
+  myvector.push_back (300);
+
+  cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); i++)
+    cout << ' ' << myvector[i];
+  cout << '\n';
+
+  myvector.clear();       
+  myvector.push_back (1101);
+  myvector.push_back (2202);
+
+  cout << "myvector contains:";
+  for (unsigned i=0; i<myvector.size(); i++)
+    cout << ' ' << myvector[i];
+  cout << '\n';
+  vector<int> menarr(3,5);
+  vector<int>::iterator it = myvector.begin();
+  it = myvector.insert(it,3);
+  auto end = myvector.end();     // 用auto指针时，只对接下来最近的用到它的指针起作用。
+  cout<<*myvector.insert(end,1995)<<endl; 
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  cout<<*myvector.begin()<<endl;;     //insert函数大多数返回的是迭代器——指针，或者根本没有返回值
+  int count = 4;
+  myvector.insert(myvector.end(),count,8);
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  int arr[] = {1,5,8};
+  myvector.insert(myvector.end(),arr,arr+3);      //此时将myvector.end()换为end，不起作用。
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  cout<<endl;
+  int arr[] = {1,5,8};
+  myvector.insert(myvector.end(),arr,arr+3);     //从改类型的开始到结束，不能用arr[0],arr[3].因为此时就变成了（iterator pos,size_type count,const T& value 此时会在myvector末尾添加一个元素‘8’
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  myvector.emplace(myvector.end(),9);      // 感觉有点尾插法的意思，再琢磨琢磨
+  for(int i = 0;i < count;++i){
+    auto it = myvector.begin();
+    myvector.insert(it+1,i);
+    }
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+myvector.erase(myvector.begin(),myvector.begin()+3);  //这个简单，范围写好就行了。
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  int&&  Meng = 55;                        //引用的引用是啥？
+  myvector.push_back(Meng);
+  for(auto i : myvector)
+    cout<<i<<'\t';
+  cout<<endl;
+  return 0;
+}

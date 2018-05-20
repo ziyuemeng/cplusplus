@@ -7,7 +7,7 @@ using namespace std;
 
 int main ()
 {
-   array<int,N> myarray,newarray;
+   array<int,N> myarray,newarray;    	//<>符号里面跟的都是数据类型
 
   array<int,N> sizeArray ;
    int i = 0;
