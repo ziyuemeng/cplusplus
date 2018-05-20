@@ -1,0 +1,48 @@
+// constructing deques
+#include <iostream>
+#include <deque>
+using namespace std;
+template<class T>
+void print(deque<T>& dq){
+  for(auto i : dq)
+    cout<<i<<'\t';
+    cout<<endl;
+}
+int main ()
+{
+  // constructors used in the same order as described above:
+  deque<int> first;                                // empty deque of ints
+  deque<int> second (4,100);                       // four ints with value 100
+  deque<int> third (5,9);  // iterating through second
+  deque<int> fourth (third);                       // a copy of third
+  // the iterator constructor can be used to copy arrays:
+  int myints[] = {16,2,77,29};
+  deque<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );   
+  cout << "The contents of fifth are:";
+  print(fifth);
+  //first(fifth);    虽然构造函数里有deque( deque&& other, const Allocator& alloc )，但是first在前面已经申明过了，也就是说已经调用过了构造函数，因此会报错。重新申明一个deque就不会出现这个问题
+  print(first);
+  auto it = fifth.begin();               //void assign( InputIt first, InputIt last );一定要注意first 和last 指代的是迭代器， array的话 写成(array,array+sizeof(array)/sizeof(T)) 
+  first.assign(it,fifth.end()-1);
+  print(first);
+  cout<<first.front()<<*(first.end()-1)<<endl;         //对于容器c，c.front() 等价于 * c.begin() c.end() 是指向容器c的最后一个元素的后一个元素的指针！！  切记。
+  second.clear(); 
+  // second现在不含项目，但它仍保有分配的内存。
+  // 调用 shrink_to_fit 可能会释放任何不使用的内存。
+  second.shrink_to_fit();
+  //auto end = fifth.end();             //尾部添加
+  fifth.insert(it,1);                  //头部添加
+  print(fifth);
+  fifth.insert(fifth.begin(),begin+1,first.end()-1);    //void insert( iterator pos, InputIt first, InputIt last);  在pos前插入，其中迭代器pos必须在容器c中，后面两个迭代器必须在同一容器中。
+  print(fifth);
+  fifth.erase(fifth.begin());       //擦除所在位置的元素
+  print(fifth);
+  fifth.push_front(99);     //将该元素放到容器起始（相当于头插）
+  print(fifth);
+  fifth.pop_front();          //移除容器的首个元素
+  fifth.push_back();          //添加到容器的末尾元素
+  fifth.pop_back();           //移除容器的末尾元素
+  fifth.resize(3);            //重新分配大小，也可以顺带着初始化void resize( size_type count, const value_type& value );
+  third.swap(fifth);          //长度不一样的容器也可以进行交换
+  return 0;
+}

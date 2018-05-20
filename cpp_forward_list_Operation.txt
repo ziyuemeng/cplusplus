@@ -1,0 +1,41 @@
+// 内置的排序成员函数不要太方便！！这他妈才是编程本来的样子！！！！！
+#include <iostream>
+#include <forward_list>
+#include <functional>
+using namespace std;
+  template<class T>
+void print(forward_list<T>& fl){
+  for (T& x: fl) cout << " " << x;
+  cout <<endl;
+}
+template<class T>
+bool big2(const double & value){
+  return value>2;
+}
+int main ()
+{
+  forward_list<double> first = {4.2, 2.9, 3.1};
+  forward_list<double> second = {1.4, 7.7, 3.1};
+  forward_list<double> third = {6.2, 3.7, 7.1}, mfl = {3,116,99};
+  first.sort();                //排序
+  second.sort();  	       //排序
+  first.merge(second);         //并归
+  first.sort (greater<double>());           //其中greater可以更改为less 变为降序排列
+  third.sort (greater<double>());
+  first.merge (third, greater<double>());
+  cout << "first contains:";
+  print(first);
+  print(second);
+  cout<<sizeof(double);         //此时second中无元素，但是保留了一个double  sizeof(double) = sizeof(second)
+  first.splice_after(first.before_begin(),mfl,mfl.begin(),mfl.end());      /*void splice_after( const_iterator pos, forward_list&& other, 
+                   const_iterator first, const_iterator last );   在目标位置pos后，插入other的first后到last的元素，并将其从other中删除  */
+  print(first); 
+  print(mfl);
+  first.remove(116);
+  //first.remove_if(big2);                 //老是出错原因不详，难道是double型的缘故？
+  print(first);
+  print(mfl);
+  first.reverse();                    //翻转列表中所有元素的顺序
+  print(first);
+  return 0;
+}

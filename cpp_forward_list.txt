@@ -1,0 +1,32 @@
+// forward_list constructors
+#include <iostream>
+#include <forward_list>
+using namespace std;
+template<class T>
+void print(forward_list<T>& fl ){
+  for(T& x:fl)
+    cout<<x<<'\t';
+  cout<<endl;
+}
+int main ()
+{
+  forward_list<int> fL(3,7),fK(5,3);
+  forward_list<int> fL1(fK.begin(),fK.end());   //注意前向列表的特性，初始化时注意对后面元素访问的方法。切忌在pos上做操作。  如fL(fK.begin()+2,fKend()-1) 类似的操作。
+  print(fL1);
+  cout<<fL.max_size()<<endl;
+  array<int,3> myarr = {11,22,33};
+  forward_list<int> myflist ;
+  forward_list<int>::iterator it = myflist.before_begin();    //此时一定注意是c.before_begin();
+  it = myflist.insert_after(it,myarr[0]);
+  print(myflist);
+  myflist.insert_after(it,myarr.begin(),myarr.end());      //后面两个是迭代器的范围
+  print(myflist);
+  myflist.push_front(55);       //头部添加元素
+  print(myflist);
+  myflist.pop_front();          //删除头部元素
+  print(myflist);
+  myflist.resize(2);            //重置大小
+  myflist.swap(fK);             //置换两前向列表
+  print(myflist);
+  return 0;
+}
