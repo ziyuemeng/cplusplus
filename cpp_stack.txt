@@ -1,0 +1,28 @@
+#include<stack>
+#include<iostream>
+#include<deque>
+#include<vector>
+using namespace std;
+template<class T>
+void print(stack<T>& s){
+    if(!s.empty()){
+        cout<<s.top()<<'\t';
+        s.pop();
+    }
+    cout<<endl;
+}
+void pushStack(stack<int>& s,vector<int>& t){   //写了个把vector逐个压栈的函数，后面想想怎么扩展
+    for(auto it:t){
+        s.push(it);
+    }
+}
+int main(){
+        //vector<int> v{1,3,5} ;        //stack不能用vector初始化
+	//deque<int> deq{1,88,999};
+        stack<int> s1 (deq) ;          //此时只能讲deq的最后一个元素压栈
+        //s1.emplace(8);
+        //s1.clear()
+        pushStack(s,v);
+        print(s1);
+        return 0;
+}
