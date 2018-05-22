@@ -1,0 +1,32 @@
+#include <set>
+#include<array>
+#include<vector>
+#include <iostream>
+using namespace std;
+/*************************************************************************
+void pushSet(set<T> s,C<T>& c){          这set是个关联容器我搁这挨个赋什么值？？！
+    for( C<T>::iterator it = c.begin();it != c.end();++it)
+        s.push(*it);
+}        错啦！无序的元素又怎样？赋值到set时自动调用构造函数就自动排序啦！！
+*************************************************************************/
+template<class T>
+void printSet(set<T>& s){
+    for(auto i:s)
+        cout<<i<<'\t';
+    cout<<endl;
+}
+int main() {
+    vector<int> v2{312,6,8,423,8,99}; //main函数里面也一定要先申明，再调用。IP指针是一条一条往下走的
+    int v[] = {1,566,7,9,48};
+    set<int>  s (v,v+5);                  //注意到，这里的区间是[first，second） v实际上代表的是v[0]这一位置，卡头去尾。
+    set<int>  s2(v2.begin(),v2.end());
+    s2.insert(1995);                //直接插入因为是无序容器，所以说谈不上插入位置
+    printSet(s2);
+    printSet(s);
+    pair<set<int>::iterator,bool> si = s.insert(9);   //pair<C,T> Obj1  可以用Obj1.first 替代C的对象
+    if(si.second =(*s.find(566) == 566))              //这里太傻叉了，可以用s.count(566) 返回的是bool型
+        si = s.insert(20);
+    else
+        si = s.insert(321);
+    return 0;
+}

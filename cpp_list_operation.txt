@@ -1,0 +1,34 @@
+//list
+#include<list>
+#include<iostream>
+using namespace std;
+template<class T>
+void printList(list<T>& l){
+    for(auto i:l){
+        cout<<i<<'\t';
+    }    
+    cout<<endl;
+}
+template<class T>
+void print(list<T>& list){
+    while(!list.empty()){
+        cout<<list.front()<<'\t';
+        list.pop_front();             //while形式的遍历应该是这样的
+    }
+    cout<<endl;
+}
+int main(){
+    list<int> li(3,5),li3(5,7);
+    li.emplace_front(1);                //头部加一个元素，且size自动加一
+    for(auto i:v)
+        li.push_front(i);               //逆序了。妙啊。又是头插法
+    li3.splice(li3.end(),li,++li.begin(),--li.end());   //看清楚构造函数的申明
+    printList(li);
+    li.sort();
+    li3.sort();
+    li.merge(li3);
+    li.unique();                //无参
+    li.remove(56);
+    print(li3);
+    return 0;
+}

@@ -1,0 +1,27 @@
+//queue
+#include<iostream>
+#include<queue>
+#include<vector>
+using namespace std;
+template<class T>
+void printQueue(queue<T>& q){
+    while(!q.empty()){
+        cout<<q.front()<<'\t';
+        q.pop();
+    }
+    cout<<endl;
+}
+int main(){
+    vector<int> v{1,4,6,8,4,2};
+    queue<int> q;
+    for(auto k:v)
+        q.push(k);
+    printQueue(q);
+    return 0;
+}
+/************************************************************
+元素访问：front	back
+容量：    empty	size
+修改器：  push	pop	swap	emplace
+这可能是所有容器中最简单的一个了
+*************************************************************/
